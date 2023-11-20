@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "melman-alex-youtube-madagascar-clip-art-madagascar-a01d96266ef78bea0805a17b5d25396b.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "melman-alex-youtube-madagascar-clip-art-madagascar-a01d96266ef78bea0805a17b5d25396b 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "melman-alex-youtube-madagascar-clip-art-madagascar-a01d96266ef78bea0805a17b5d25396b 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
