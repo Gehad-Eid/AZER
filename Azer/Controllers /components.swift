@@ -1,18 +1,18 @@
 //
-//  LoginScreen.swift
+//  components.swift
 //  Azer
 //
-//  Created by Gehad Eid on 21/11/2023.
+//  Created by Gehad Eid on 25/11/2023.
 //
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct components: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    LoginScreen()
+    components()
 }
