@@ -7,16 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B81B82472B0BE87700FB110F /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B82462B0BE87700FB110F /* OnboardingScreen.swift */; };
+		B81B824A2B0BEDF600FB110F /* constnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B82492B0BEDF600FB110F /* constnts.swift */; };
+		B81B824E2B0CAFAF00FB110F /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B824D2B0CAFAF00FB110F /* LoginScreen.swift */; };
+		B8B244B72B0B4FB00059BB00 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B244B62B0B4FB00059BB00 /* SplashScreen.swift */; };
+		B8B244BA2B0B50890059BB00 /* SplashScreen-Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B244B92B0B50890059BB00 /* SplashScreen-Launch.storyboard */; };
+		B8B244BC2B0B50B80059BB00 /* WorldScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B244BB2B0B50B80059BB00 /* WorldScreen.swift */; };
+		B8D70D1E2B124E0200504CC9 /* components.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D70D1D2B124E0200504CC9 /* components.swift */; };
 		B8E78D9E2B09EA5F00C9DACB /* AzerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E78D9D2B09EA5F00C9DACB /* AzerApp.swift */; };
-		B8E78DA02B09EA5F00C9DACB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E78D9F2B09EA5F00C9DACB /* ContentView.swift */; };
 		B8E78DA22B09EA6000C9DACB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E78DA12B09EA6000C9DACB /* Assets.xcassets */; };
 		B8E78DA52B09EA6000C9DACB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E78DA42B09EA6000C9DACB /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B81B82462B0BE87700FB110F /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		B81B82492B0BEDF600FB110F /* constnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constnts.swift; sourceTree = "<group>"; };
+		B81B824D2B0CAFAF00FB110F /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		B8B244B62B0B4FB00059BB00 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		B8B244B92B0B50890059BB00 /* SplashScreen-Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "SplashScreen-Launch.storyboard"; sourceTree = "<group>"; };
+		B8B244BB2B0B50B80059BB00 /* WorldScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldScreen.swift; sourceTree = "<group>"; };
+		B8D70D1D2B124E0200504CC9 /* components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = components.swift; sourceTree = "<group>"; };
 		B8E78D9A2B09EA5F00C9DACB /* Azer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Azer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E78D9D2B09EA5F00C9DACB /* AzerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzerApp.swift; sourceTree = "<group>"; };
-		B8E78D9F2B09EA5F00C9DACB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B8E78DA12B09EA6000C9DACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8E78DA42B09EA6000C9DACB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +44,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B81B82482B0BEDC900FB110F /* Controllers  */ = {
+			isa = PBXGroup;
+			children = (
+				B81B82492B0BEDF600FB110F /* constnts.swift */,
+				B8D70D1D2B124E0200504CC9 /* components.swift */,
+			);
+			path = "Controllers ";
+			sourceTree = "<group>";
+		};
+		B8B244B82B0B50550059BB00 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8D70D1C2B124CBB00504CC9 /* Auth */,
+				B8B244BD2B0B5A400059BB00 /* Splash Screen */,
+				B8B244BB2B0B50B80059BB00 /* WorldScreen.swift */,
+				B81B82462B0BE87700FB110F /* OnboardingScreen.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B8B244BD2B0B5A400059BB00 /* Splash Screen */ = {
+			isa = PBXGroup;
+			children = (
+				B8B244B62B0B4FB00059BB00 /* SplashScreen.swift */,
+				B8B244B92B0B50890059BB00 /* SplashScreen-Launch.storyboard */,
+			);
+			path = "Splash Screen";
+			sourceTree = "<group>";
+		};
+		B8D70D1C2B124CBB00504CC9 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B81B824D2B0CAFAF00FB110F /* LoginScreen.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		B8E78D912B09EA5F00C9DACB = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +100,9 @@
 		B8E78D9C2B09EA5F00C9DACB /* Azer */ = {
 			isa = PBXGroup;
 			children = (
+				B81B82482B0BEDC900FB110F /* Controllers  */,
 				B8E78D9D2B09EA5F00C9DACB /* AzerApp.swift */,
-				B8E78D9F2B09EA5F00C9DACB /* ContentView.swift */,
+				B8B244B82B0B50550059BB00 /* Views */,
 				B8E78DA12B09EA6000C9DACB /* Assets.xcassets */,
 				B8E78DA32B09EA6000C9DACB /* Preview Content */,
 			);
@@ -127,6 +177,7 @@
 			files = (
 				B8E78DA52B09EA6000C9DACB /* Preview Assets.xcassets in Resources */,
 				B8E78DA22B09EA6000C9DACB /* Assets.xcassets in Resources */,
+				B8B244BA2B0B50890059BB00 /* SplashScreen-Launch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +188,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8E78DA02B09EA5F00C9DACB /* ContentView.swift in Sources */,
+				B8D70D1E2B124E0200504CC9 /* components.swift in Sources */,
+				B81B82472B0BE87700FB110F /* OnboardingScreen.swift in Sources */,
+				B81B824A2B0BEDF600FB110F /* constnts.swift in Sources */,
+				B8B244BC2B0B50B80059BB00 /* WorldScreen.swift in Sources */,
+				B8B244B72B0B4FB00059BB00 /* SplashScreen.swift in Sources */,
 				B8E78D9E2B09EA5F00C9DACB /* AzerApp.swift in Sources */,
+				B81B824E2B0CAFAF00FB110F /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
