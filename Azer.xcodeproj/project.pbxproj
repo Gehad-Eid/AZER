@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72BB55F32B15EA9D003B5169 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB55F22B15EA9D003B5169 /* Challenge.swift */; };
+		72BB55F52B15EE9E003B5169 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB55F42B15EE9E003B5169 /* test.swift */; };
+		72BB55F72B167DDE003B5169 /* Challenge2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB55F62B167DDE003B5169 /* Challenge2.swift */; };
+		72BB55FB2B16803A003B5169 /* challenge3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB55FA2B16803A003B5169 /* challenge3.swift */; };
+		72BB55FD2B168177003B5169 /* challenge4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB55FC2B168177003B5169 /* challenge4.swift */; };
+		72BB55FF2B168236003B5169 /* challenge5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB55FE2B168236003B5169 /* challenge5.swift */; };
+		72BB56012B1683A1003B5169 /* passed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB56002B1683A1003B5169 /* passed.swift */; };
 		B81B82472B0BE87700FB110F /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B82462B0BE87700FB110F /* OnboardingScreen.swift */; };
 		B81B824A2B0BEDF600FB110F /* constnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B82492B0BEDF600FB110F /* constnts.swift */; };
 		B81B824E2B0CAFAF00FB110F /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B824D2B0CAFAF00FB110F /* LoginScreen.swift */; };
@@ -20,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72BB55F22B15EA9D003B5169 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		72BB55F42B15EE9E003B5169 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		72BB55F62B167DDE003B5169 /* Challenge2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge2.swift; sourceTree = "<group>"; };
+		72BB55FA2B16803A003B5169 /* challenge3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = challenge3.swift; sourceTree = "<group>"; };
+		72BB55FC2B168177003B5169 /* challenge4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = challenge4.swift; sourceTree = "<group>"; };
+		72BB55FE2B168236003B5169 /* challenge5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = challenge5.swift; sourceTree = "<group>"; };
+		72BB56002B1683A1003B5169 /* passed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passed.swift; sourceTree = "<group>"; };
 		B81B82462B0BE87700FB110F /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		B81B82492B0BEDF600FB110F /* constnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constnts.swift; sourceTree = "<group>"; };
 		B81B824D2B0CAFAF00FB110F /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -60,6 +74,13 @@
 				B8B244BD2B0B5A400059BB00 /* Splash Screen */,
 				B8B244BB2B0B50B80059BB00 /* WorldScreen.swift */,
 				B81B82462B0BE87700FB110F /* OnboardingScreen.swift */,
+				72BB55F22B15EA9D003B5169 /* Challenge.swift */,
+				72BB55F62B167DDE003B5169 /* Challenge2.swift */,
+				72BB55FA2B16803A003B5169 /* challenge3.swift */,
+				72BB55FC2B168177003B5169 /* challenge4.swift */,
+				72BB55FE2B168236003B5169 /* challenge5.swift */,
+				72BB56002B1683A1003B5169 /* passed.swift */,
+				72BB55F42B15EE9E003B5169 /* test.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,11 +211,18 @@
 			files = (
 				B8D70D1E2B124E0200504CC9 /* components.swift in Sources */,
 				B81B82472B0BE87700FB110F /* OnboardingScreen.swift in Sources */,
+				72BB55FD2B168177003B5169 /* challenge4.swift in Sources */,
+				72BB56012B1683A1003B5169 /* passed.swift in Sources */,
 				B81B824A2B0BEDF600FB110F /* constnts.swift in Sources */,
+				72BB55FF2B168236003B5169 /* challenge5.swift in Sources */,
 				B8B244BC2B0B50B80059BB00 /* WorldScreen.swift in Sources */,
+				72BB55FB2B16803A003B5169 /* challenge3.swift in Sources */,
+				72BB55F52B15EE9E003B5169 /* test.swift in Sources */,
 				B8B244B72B0B4FB00059BB00 /* SplashScreen.swift in Sources */,
 				B8E78D9E2B09EA5F00C9DACB /* AzerApp.swift in Sources */,
 				B81B824E2B0CAFAF00FB110F /* LoginScreen.swift in Sources */,
+				72BB55F72B167DDE003B5169 /* Challenge2.swift in Sources */,
+				72BB55F32B15EA9D003B5169 /* Challenge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
