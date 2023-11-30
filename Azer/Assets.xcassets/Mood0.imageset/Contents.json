@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Screenshot 1445-05-14 at 12.46.14.png",
+      "filename" : "LoveMood.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "LoveMood@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "LoveMood@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
