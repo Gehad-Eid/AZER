@@ -21,6 +21,7 @@
 		B877F60F2B19CB940064EF9F /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877F60E2B19CB940064EF9F /* ForgotPasswordScreen.swift */; };
 		B877F6112B19CBAB0064EF9F /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877F6102B19CBAB0064EF9F /* LoginScreen.swift */; };
 		B877F6132B19CBCE0064EF9F /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877F6122B19CBCE0064EF9F /* SignUpScreen.swift */; };
+		B8F886792B19D6BC00454479 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F886782B19D6BC00454479 /* Challenge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		B877F60E2B19CB940064EF9F /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
 		B877F6102B19CBAB0064EF9F /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		B877F6122B19CBCE0064EF9F /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		B8F886782B19D6BC00454479 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +102,10 @@
 		B877F5FE2B19C9260064EF9F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B8F886772B19D68200454479 /* Screens */,
 				B877F60D2B19CB820064EF9F /* Auth */,
 				B877F60A2B19CA250064EF9F /* Splash & Onboarding  */,
 				B877F6012B19C9830064EF9F /* Taps */,
-				B877F6082B19C9FB0064EF9F /* MainTabbedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,6 +137,15 @@
 				B877F6122B19CBCE0064EF9F /* SignUpScreen.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		B8F886772B19D68200454479 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B877F6082B19C9FB0064EF9F /* MainTabbedView.swift */,
+				B8F886782B19D6BC00454479 /* Challenge.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B877F60C2B19CA3B0064EF9F /* SplashScreen.swift in Sources */,
+				B8F886792B19D6BC00454479 /* Challenge.swift in Sources */,
 				B877F60F2B19CB940064EF9F /* ForgotPasswordScreen.swift in Sources */,
 				B877F6002B19C96B0064EF9F /* OnboardingScreen.swift in Sources */,
 				B877F6052B19C9BB0064EF9F /* MyMapScreen.swift in Sources */,
