@@ -1,7 +1,13 @@
 
 # AZER - Improve Your Life Quality
 
-- [About](#about)
+## About
+AZER is an iOS application designed to enhance individuals' quality of life by uplifting their mood through engaging challenges. The app focuses on self-improvement, fostering a positive mindset, and connecting users through challenges and progress tracking.
+
+---
+
+## Table of content
+
 - [Features](#features)
   - [Mood Enhancement Challenges](#mood-enhancement-challenges)
   - [Friend Rooms](#friend-rooms)
@@ -12,9 +18,9 @@
   - [Map Tracking](#map-tracking-1)
 - [Feedback and Support](#feedback-and-support)
 
-## About
-AZER is an iOS application designed to enhance individuals' quality of life by uplifting their mood through engaging challenges. The app focuses on self-improvement, fostering a positive mindset, and connecting users through challenges and progress tracking.
 
+
+---
 ## Features
 
 ### Mood Enhancement Challenges
