@@ -1,5 +1,5 @@
 
-# AZER - Improve Your Life Quality
+# AZER - Your digital mancave 
 
 ## About
 AZER is an iOS application designed to enhance individuals' quality of life by uplifting their mood through engaging challenges. The app focuses on self-improvement, fostering a positive mindset, and connecting users through challenges and progress tracking.
@@ -57,9 +57,7 @@ AZER is an iOS application designed to enhance individuals' quality of life by u
 
 ## Feedback and Support
 
-For any questions, feedback, or support, feel free to contact our support team at support@azerapp.com. We appreciate your suggestions and are dedicated to enhancing your experience.
-
-Join our community on social media to stay updated and share your experiences: [Facebook](https://www.facebook.com/AZERapp) | [Twitter](https://twitter.com/AZERapp) | [Instagram](https://www.instagram.com/AZERapp)
+For any questions, feedback, or support, feel free to contact our team. We appreciate your suggestions and are dedicated to enhancing your experience.
 
 We hope AZER enriches your life and helps you achieve a positive mindset!
 
