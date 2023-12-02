@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct Challenge: View {
+    let image : String
+    let challenge : String
+    
     var body: some View {
-        ScrollView (showsIndicators: false) {
-            VStack (alignment: .leading, spacing: 0) {
+        VStack {
+            ZStack {
+                // Background decoration
                 UnevenRoundedRectangle(
                     cornerRadii: .init(bottomLeading: 120,
                                        bottomTrailing: 120)
@@ -18,13 +22,42 @@ struct Challenge: View {
                 .fill(Color("BackgoundDecoration"))
                 .frame(width: .infinity, height: 550)
                 
-                Text("yo yo, challenge!")
+                // The challenge
+                VStack {
+                    Image(image)
+                        .resizable()
+                        .frame( maxWidth: 200,maxHeight: 300)
+                        .padding(.bottom, tdefaultPadding)
+                    
+                    Text(challenge)
+                        .bold()
+                        .font(.title2)
+                        .foregroundColor(Color("challengeTextColor"))
+                }
             }
+            
+            Spacer()
+            
+            // Buttons
+            HStack (spacing: 24) {
+                tcustomButton(title: "Start Timer", color: "primaryButtonColor")
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                tcustomButton(title: "Pass", color: "")
+                    .overlay(RoundedRectangle(cornerRadius: tcornerRadius)
+                        .stroke(.black, lineWidth: 1.5))
+            }
+            .padding(tdefaultPadding)
+            
+            Spacer()
         }
         .edgesIgnoringSafeArea(.top)
+        .ignoresSafeArea()
     }
 }
 
 #Preview {
-    Challenge()
+    Challenge(image: "", challenge: "")
 }

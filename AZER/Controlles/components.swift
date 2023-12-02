@@ -17,11 +17,9 @@ struct tcustomButton: View {
     var body: some View {
         Text(title)
             .font(.title3)
-            .fontWeight(.bold)
             .frame(maxWidth: .infinity, maxHeight: tbuttonHight)
             .background(Color(color))
             .cornerRadius(tcornerRadius)
-//            .padding(tdefaultPadding)
     }
 }
 
@@ -202,36 +200,40 @@ struct topBar: View {
 
 // Scrollable Mood Sellection
 struct scrollableMoodSellection: View {
+    
+    let challenges = ["Take a 10 minutes walk",
+                     "Sing out loud",
+                     "Meditate on candlelight",
+                     "Hug the nearest person around",
+                     "Pet a stray animal"]
+    
     var body: some View {
         VStack {
             Rectangle()
-                .frame(width: .infinity,height: 190)
+                .frame(width: .infinity, height: 190)
                 .opacity(0)
             
-            
-            ScrollView(.horizontal,showsIndicators: false) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(0..<5) {
-                        Image("Mood\($0)")
-                            .resizable()
-                            .foregroundStyle(.white)
-                            .font(.largeTitle)
-                            .frame(width: 90, height: 90)
-                        
-//                        Text("Description")
-//                            .foregroundColor(.white)
-//                            .font(.caption)
-//                            .padding(4)
-//                            .background(Color.black.opacity(0.7))
-//                            .cornerRadius(4)
-//                            .shadow(color: .black, radius: 4, x: 0, y: 2)
+                    ForEach(0..<5) { index in
+                        NavigationLink(
+                            destination: Challenge(image: "challenge\(index)", challenge: challenges[index]),
+                            label: {
+                                Image("Mood\(index)")
+                                    .resizable()
+                                    .foregroundStyle(.white)
+                                    .font(.largeTitle)
+                                    .frame(width: 90, height: 90)
+                            }
+                        )
                     }
                 }
+                .padding(.horizontal, tdefaultPadding - 10)
             }
-            .padding(.horizontal, tdefaultPadding - 10)
         }
     }
 }
+
 
 // Custom progress bar
 struct progressBar: View {
@@ -262,6 +264,39 @@ struct progressBar: View {
                 )
                 .foregroundColor(.clear)
                 .padding(padding)
+        }
+    }
+}
+
+
+// Custom white card with a title
+struct cardWithTitle<Content: View>: View {
+    let contentView: Content
+    let title: String
+    let height: CGFloat
+    
+    init(title: String, height: CGFloat, @ViewBuilder content: () -> Content) {
+        self.title = title
+        self.height = height
+        self.contentView = content()
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7){
+            Text(title)
+                .padding(.horizontal,tdefaultPadding)
+                .padding(.top, tdefaultPadding)
+                .font(.title2)
+            
+            ZStack{
+                RoundedRectangle(cornerRadius: tcornerRadius)
+                    .fill(.gray.opacity(0.2))
+                    .frame(width: .infinity, height: height)
+                
+                // Whatever custom view we need to add on the card
+                contentView
+            }
+            .padding(.horizontal,tdefaultPadding)
         }
     }
 }
