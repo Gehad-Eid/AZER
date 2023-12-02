@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorldScreen: View {
     
-    @State private var isLoggedin = false
+    @State private var isLoggedin = true
     
     var body: some View {
         ScrollView (showsIndicators: false) {
@@ -19,7 +19,7 @@ struct WorldScreen: View {
                     // Moods
                     scrollableMoodSellection()
                     
-                   if isLoggedin {
+                    if isLoggedin {
                         // 21 days challenge
                         cardWithTitle(
                             title: "21 days challenge", height: 70,
@@ -27,9 +27,9 @@ struct WorldScreen: View {
                                 VStack(alignment: .leading , spacing: -5) {
                                     progressBar(height: 20, width: 0, padding: 10)
                                     
-                                    Text("Sign in to start your journey")
+                                    Text("Day 11 / 21")
                                         .font(.footnote)
-                                        .padding(.horizontal,10)
+                                        .padding(.horizontal,12)
                                         .foregroundColor(.gray)
                                     
                                 }
@@ -38,7 +38,7 @@ struct WorldScreen: View {
                         
                         // Mood tracker
                         cardWithTitle(
-                            title: "Mood tracker", height: 100,
+                            title: "Mood tracker", height: 120,
                             content: {
                                 VStack{
                                     Spacer()
@@ -49,26 +49,28 @@ struct WorldScreen: View {
                                     
                                     Spacer()
                                     
-                                    Text("No entry yet, sign up to track your mood ")
-                                        .font(.footnote)
-                                        .padding(.horizontal,10)
-                                        .foregroundColor(.gray)
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 12) {
+                                            ForEach(0..<5) { index in
+                                                Image("Mood\(index)")
+                                                    .resizable()
+                                                    .foregroundStyle(.white)
+                                                    .font(.largeTitle)
+                                                    .frame(width: 60, height: 60)
+                                            }
+                                        }
+                                        .padding(.horizontal, tdefaultPadding - 10)
+                                    }
+                                    Spacer()
                                     Spacer()
                                 }
                             }
                         )
                         
                         // Rooms
-                        cardWithTitle(
-                            title: "Allies are up to", height: 100,
-                            content: {
-                                Text("Sign up and add friends to enjoy group challenges")
-                                    .font(.footnote)
-                                    .padding(.horizontal,10)
-                                    .foregroundColor(.gray)
-                            }
-                        )
-                   } else {
+                        currentRooms(title: "Allies are up to")
+                        
+                    } else {
                        // 21 days challenge
                        cardWithTitle(
                            title: "21 days challenge", height: 70,

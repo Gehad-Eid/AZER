@@ -234,6 +234,60 @@ struct scrollableMoodSellection: View {
     }
 }
 
+// Custom user room cards
+struct currentRooms: View {
+    let title : String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10){
+            Text(title)
+                .padding(.horizontal,tdefaultPadding)
+                .padding(.top, tdefaultPadding)
+                .font(.title2)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    let rooms = ["Room name 1",
+                                 "Room name 2",
+                                 "Room name 3"]
+                    
+                    let roomsExplanation = ["Room explanation 1",
+                                            "Room explanation 2",
+                                            "Room explanation 3"]
+                    
+                    ForEach(0..<3) { index in
+                        ZStack{
+                            RoundedRectangle(cornerRadius: tcornerRadius)
+                                .fill(Color("roomCardColor"))
+                                .frame(width: 150, height: 210)
+                            VStack (alignment: .leading) {
+                                Spacer()
+                                
+                                Image("room\(index)")
+                                    .resizable()
+                                    .frame(maxWidth: 120, maxHeight: 100)
+                                
+                                Spacer()
+                                
+                                Text(rooms[index])
+                                    .font(.title3)
+                                    .foregroundColor(.white)
+                                
+                                Text(roomsExplanation[index])
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal,tdefaultPadding)
+            }
+        }
+    }
+}
+
 
 // Custom progress bar
 struct progressBar: View {
