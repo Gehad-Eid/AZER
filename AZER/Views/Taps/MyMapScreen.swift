@@ -9,7 +9,64 @@ import SwiftUI
 
 struct MyMapScreen: View {
     var body: some View {
-        Text("Hello, Map!")
+        
+            ScrollView (showsIndicators: false) {
+                
+                    ZStack (alignment: .top){
+                        VStack {
+                            Rectangle()
+                                .frame(width: .infinity, height: 160)
+                                .opacity(0)
+                            
+                            Image("Map")
+                                .resizable()
+                                .frame(maxWidth: .infinity,maxHeight:800)
+                        }
+                        
+                        ZStack {
+                            Rectangle()
+                                .fill(Color("BackgoundDecoration"))
+                                .frame(width: .infinity, height: 170)
+                            
+                            HStack{
+                                Image("Logo")
+                                    .resizable()
+                                    .frame(width: 90, height: 90)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .leading) {
+                                    Text("Hi Bahaa!")
+                                        .font(.title)
+                                        .foregroundColor(Color("HeadlineColor"))
+                                        .padding(tdefaultPadding)
+                                    
+                                    
+                                }
+                                
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+//                                NavigationLink (destination: SettingsScreen()){
+                                    Image("Set")
+                                        .resizable()
+                                        .frame(width: 30,height: 30)
+//                                }
+                            }
+                            .padding(tdefaultPadding)
+                        }
+                        .edgesIgnoringSafeArea(.top)
+                    }
+                
+            }
+            .edgesIgnoringSafeArea(.top)
+        
     }
 }
 

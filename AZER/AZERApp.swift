@@ -18,9 +18,9 @@ struct AZERApp: App {
 }
 
 // To hide NavigationBar globaly without losing swipe back gesture
-extension UINavigationController {
-    open override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        navigationBar.isHidden = true
-    }
-}
+//extension UINavigationController {
+//    open override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        navigationBar.isHidden = true
+//    }
+//}

@@ -241,6 +241,7 @@ struct currentRooms: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
             Text(title)
+//                .foregroundColor(Color("sublinesColor"))
                 .padding(.horizontal,tdefaultPadding)
                 .padding(.top, tdefaultPadding)
                 .font(.title2)
@@ -322,6 +323,34 @@ struct progressBar: View {
     }
 }
 
+// Friends widget
+struct friends: View {
+    var body: some View {
+        VStack (alignment: .leading) {
+            Text("Friends")
+                .font(.title2)
+                .padding(.horizontal,tdefaultPadding)
+//                .foregroundColor(Color("sublinesColor"))
+            
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(0..<5) { index in
+                        Image("Mood\(index)")
+                            .resizable()
+                            .clipShape(Circle())
+                            .foregroundStyle(.white)
+                            .font(.largeTitle)
+                            .overlay(Circle()
+                                .stroke(Color("sublinesColor"), lineWidth: 3))
+                            .frame(width: 60, height: 60)
+                    }
+                }
+                .padding(.horizontal, tdefaultPadding)
+            }
+        }
+    }
+}
 
 // Custom white card with a title
 struct cardWithTitle<Content: View>: View {
@@ -338,6 +367,7 @@ struct cardWithTitle<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 7){
             Text(title)
+//                .foregroundColor(Color("sublinesColor"))
                 .padding(.horizontal,tdefaultPadding)
                 .padding(.top, tdefaultPadding)
                 .font(.title2)

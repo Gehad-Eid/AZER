@@ -21,6 +21,7 @@
 		B877F60F2B19CB940064EF9F /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877F60E2B19CB940064EF9F /* ForgotPasswordScreen.swift */; };
 		B877F6112B19CBAB0064EF9F /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877F6102B19CBAB0064EF9F /* LoginScreen.swift */; };
 		B877F6132B19CBCE0064EF9F /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877F6122B19CBCE0064EF9F /* SignUpScreen.swift */; };
+		B88C1DE82B1F214C000DBAA6 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88C1DE72B1F214C000DBAA6 /* SettingsScreen.swift */; };
 		B8F886792B19D6BC00454479 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F886782B19D6BC00454479 /* Challenge.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		B877F60E2B19CB940064EF9F /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
 		B877F6102B19CBAB0064EF9F /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		B877F6122B19CBCE0064EF9F /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		B88C1DE72B1F214C000DBAA6 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		B8F886782B19D6BC00454479 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 			children = (
 				B877F6082B19C9FB0064EF9F /* MainTabbedView.swift */,
 				B8F886782B19D6BC00454479 /* Challenge.swift */,
+				B88C1DE72B1F214C000DBAA6 /* SettingsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				B877F5FD2B19C9060064EF9F /* constnts.swift in Sources */,
 				B877F6072B19C9D50064EF9F /* WorldScreen.swift in Sources */,
 				B877F6032B19C99C0064EF9F /* AlliesScreen.swift in Sources */,
+				B88C1DE82B1F214C000DBAA6 /* SettingsScreen.swift in Sources */,
 				B877F5EC2B19C8470064EF9F /* AZERApp.swift in Sources */,
 				B877F5FB2B19C8E20064EF9F /* components.swift in Sources */,
 				B877F6112B19CBAB0064EF9F /* LoginScreen.swift in Sources */,

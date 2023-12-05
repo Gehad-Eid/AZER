@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 //                      - Consts -
-let tdefaultPadding : CGFloat = 30
+let tdefaultPadding : CGFloat = 20
 let tcornerRadius : CGFloat = 12
 let tbuttonHight : CGFloat = 50
 

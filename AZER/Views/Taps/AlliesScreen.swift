@@ -10,8 +10,16 @@ import SwiftUI
 struct AlliesScreen: View {
     var body: some View {
         ScrollView (showsIndicators: false) {
-            VStack (alignment: .leading, spacing: 0) {
+            VStack (alignment: .leading, spacing: 20) {
+                
                 topBar(height: 260)
+                
+                // Friends
+                friends()
+                
+                // Rooms
+                currentRooms(title: "Ongoing group challenges")
+//                    .foregroundColor(Color("sublinesColor"))
             }
         }
         .edgesIgnoringSafeArea(.top)
@@ -21,3 +29,4 @@ struct AlliesScreen: View {
 #Preview {
     AlliesScreen()
 }
+

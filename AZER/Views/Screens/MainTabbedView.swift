@@ -37,12 +37,17 @@ enum TabbedItems: Int, CaseIterable{
 }
 
 struct MainTabbedView: View {
+    let loged : Bool
     
     @State var selectedTab = 0
+    @State var user = ["Bahaa Ibrahim",
+                       ["s","h","s","a","f","a"],
+                       14,
+                       3]
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            WorldScreen()
+            WorldScreen(isLoggedin: loged)
                 .tag(0)
             
             AlliesScreen()
@@ -53,6 +58,10 @@ struct MainTabbedView: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            // To stop the swipe effect between pages
+              UIScrollView.appearance().isScrollEnabled = false
+        }
         
         ZStack(alignment: .bottom){
             HStack{
@@ -76,5 +85,5 @@ struct MainTabbedView: View {
 
 
 #Preview {
-    MainTabbedView()
+    MainTabbedView(loged: false)
 }

@@ -10,9 +10,11 @@ import SwiftUI
 struct LoginScreen: View {
     @State private var email  = ""
     @State private var password  = ""
+    @State var finishLogin = false
 
     var body: some View {
-        NavigationStack {
+        //        NavigationStack {
+        if !finishLogin {
             ZStack{
                 // Back ground color
                 bgColor()
@@ -37,28 +39,27 @@ struct LoginScreen: View {
                         NavigationLink(
                             destination: ForgotPasswordScreen(),
                             label:{ Text("Forgot password?").underline().font(.footnote)
-                        })
-                                
+                            })
+                        
                         Spacer()
                         
                         NavigationLink(
                             destination: SignUpScreen(),
                             label:{ Text("Not a member?").underline().font(.footnote)
-                        })
-                        
+                            })
                     }
                     
                     
                     // Button
-                    NavigationLink(
-                        destination: MainTabbedView(),
-                        label:{ tcustomButton(title: "Login", color: "primaryButtonColor")
-                    })
+                    tcustomButton(title: "Login", color: "primaryButtonColor")
+                        .onTapGesture {
+                            finishLogin = true
+                        }
                     
                     
                     // Or And Sign In With Apple Button
                     customOrAndSignInWithAppleButton()
-                                        
+                    
                     
                     Spacer()
                 }
@@ -66,6 +67,9 @@ struct LoginScreen: View {
                 .padding(tdefaultPadding)
             }
             .foregroundColor(.white)
+        }
+        else{
+            MainTabbedView(loged: true)
         }
     }
 }

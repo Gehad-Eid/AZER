@@ -43,9 +43,11 @@ struct SignUpScreen: View {
                     // Button
                     
                     NavigationLink(
-                        destination: MainTabbedView(),
+                        destination: MainTabbedView(loged: true),
                         label:{ tcustomButton(title: "Sign Up", color: "primaryButtonColor")
+                                
                     })
+                    .navigationBarHidden(true)
                     
                     // Or And Sign In With Apple Button
                     customOrAndSignInWithAppleButton()
