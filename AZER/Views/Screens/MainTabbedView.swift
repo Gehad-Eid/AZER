@@ -37,53 +37,50 @@ enum TabbedItems: Int, CaseIterable{
 }
 
 struct MainTabbedView: View {
-    let loged : Bool
-    
     @State var selectedTab = 0
-    @State var user = ["Bahaa Ibrahim",
-                       ["s","h","s","a","f","a"],
-                       14,
-                       3]
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            WorldScreen(isLoggedin: loged)
-                .tag(0)
+        VStack{
+            TabView(selection: $selectedTab) {
+                WorldScreen()
+                    .tag(0)
+                
+                AlliesScreen()
+                    .tag(1)
+                
+                MyMapScreen()
+                    .tag(2)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .edgesIgnoringSafeArea(.top)
+            .onAppear {
+                // To stop the swipe effect between pages
+                UIScrollView.appearance().isScrollEnabled = false
+            }
             
-            AlliesScreen()
-                .tag(1)
-            
-            MyMapScreen()
-                .tag(2)
-        }
-        .tabViewStyle(.page(indexDisplayMode: .never))
-        .edgesIgnoringSafeArea(.top)
-        .onAppear {
-            // To stop the swipe effect between pages
-              UIScrollView.appearance().isScrollEnabled = false
-        }
-        
-        ZStack(alignment: .bottom){
-            HStack{
-                ForEach((TabbedItems.allCases), id: \.self){ item in
-                    Button{
-                        selectedTab = item.rawValue
-                    } label: {
-                        CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+            ZStack(alignment: .bottom){
+                HStack{
+                    ForEach((TabbedItems.allCases), id: \.self){ item in
+                        Spacer()
+                        Button{
+                            selectedTab = item.rawValue
+                        } label: {
+                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                        }
+                        
+                        Spacer()
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: 100)
+                .background(.white)
+                .cornerRadius(30) 
+                .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 0)
             }
-            .padding(6)
-            .frame(height: 70)
-            .background(Color("primaryButtonColor").opacity(0.2))
-            .cornerRadius(35) //tcornerRadius
-            .padding(.horizontal, tcornerRadius)
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
-
-
 #Preview {
-    MainTabbedView(loged: false)
+    MainTabbedView()
 }

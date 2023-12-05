@@ -12,7 +12,11 @@ struct SignUpScreen: View {
     @State private var username  = ""
     @State private var password  = ""
     @State private var confirmPassword  = ""
-
+    
+    @EnvironmentObject var userModel : UserModel
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             ZStack{
@@ -42,11 +46,15 @@ struct SignUpScreen: View {
                     
                     // Button
                     
-                    NavigationLink(
-                        destination: MainTabbedView(loged: true),
+//                    NavigationLink(
+//                        destination: MainTabbedView(loged: true),
+                    Button{
+                        userModel.addUser(username: username, email: email, password: password)
+                    }
                         label:{ tcustomButton(title: "Sign Up", color: "primaryButtonColor")
-                                
-                    })
+                            
+                        }
+//                    )
                     .navigationBarHidden(true)
                     
                     // Or And Sign In With Apple Button
@@ -54,15 +62,21 @@ struct SignUpScreen: View {
                     
                     Spacer()
                     
+                    Button{
+                        dismiss()
+                    }
+                label:{
                     HStack {
                         Text("Already a member?")
-                        NavigationLink(
-                            destination: LoginScreen(),
-                            label:{ Text("Log in").underline()
-                        })
+                        //                        NavigationLink(
+                        //                            destination: LoginScreen(),
+                        //                            label:{
+                        Text("Log in").underline()
+                        //                        })
                         
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
+                }
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)

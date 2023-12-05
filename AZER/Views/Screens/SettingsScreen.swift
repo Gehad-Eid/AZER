@@ -12,11 +12,11 @@ struct SettingsScreen: View {
     @State private var password  = ""
     @State private var username  = ""
 
-    @State var finishLogin = false
+//    @State var finishLogin = false
 
     var body: some View {
         //        NavigationStack {
-        if !finishLogin {
+//        if !finishLogin {
             ZStack{
                 // Back ground color
                 bgColor()
@@ -57,11 +57,11 @@ struct SettingsScreen: View {
                     Spacer()
                     
                     // Button
-                    tcustomButton(title: "Sign Out", color: "primaryButtonColor")
-                        .onTapGesture {
-                            finishLogin = true
-                        }
-                    
+                    tcustomButton(title: "Update", color: "primaryButtonColor")
+//                        .onTapGesture {
+//                            finishLogin = true
+//                        }
+//                    
                     
 //                    // Or And Sign In With Apple Button
 //                    customOrAndSignInWithAppleButton()
@@ -73,10 +73,10 @@ struct SettingsScreen: View {
                 .padding(tdefaultPadding)
             }
             .foregroundColor(.white)
-        }
-        else{
-            LoginScreen()
-        }
+//        }
+//        else{
+//            LoginScreen()
+//        }
     }
 }
 

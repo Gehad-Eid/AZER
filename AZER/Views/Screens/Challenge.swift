@@ -43,7 +43,7 @@ struct Challenge: View {
             // Buttons
             if !timer{
                 HStack (spacing: 24) {
-                    tcustomButton(title: "Pass", color: "")
+                    tcustomButton(title: "Pass", color: "primaryTextColor")
                         .overlay(RoundedRectangle(cornerRadius: tcornerRadius)
                             .stroke(.black, lineWidth: 1.5))
                         .onTapGesture {
@@ -78,12 +78,10 @@ struct Challenge: View {
 
 
 struct TimerView: View {
-    //MARK: - PROPERTIES
     @State var timeRemaining = 24*60*60
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
-    //MARK: - BODY
     var body: some View {
         
         Text("\(timeString(time: timeRemaining))")

@@ -10,11 +10,13 @@ import SwiftUI
 struct LoginScreen: View {
     @State private var email  = ""
     @State private var password  = ""
-    @State var finishLogin = false
+    @EnvironmentObject var userModel : UserModel
+    
+//    @State var finishLogin = false
 
     var body: some View {
-        //        NavigationStack {
-        if !finishLogin {
+        NavigationStack {
+            //        if !finishLogin {
             ZStack{
                 // Back ground color
                 bgColor()
@@ -31,30 +33,41 @@ struct LoginScreen: View {
                     
                     // Email
                     tcustomTextfeild(text: $email, placeholder: "Email", imageName: "envelope.fill")
+                        .autocapitalization(.none)
                     
                     // Password
                     tcustomTextfeild(text: $password, placeholder: "Password", imageName: "lock.fill", isSecure: true)
                     
                     HStack {
+                        //                        Button("Forgot password?", action: UserModel.logPressed).font(.footnote)
                         NavigationLink(
-                            destination: ForgotPasswordScreen(),
+                            destination: ForgotPasswordScreen().navigationBarBackButtonHidden(true),
                             label:{ Text("Forgot password?").underline().font(.footnote)
                             })
                         
                         Spacer()
                         
+                        //                        Button("Not a member?", action: UserModel.logPressed).font(.footnote)
                         NavigationLink(
-                            destination: SignUpScreen(),
+                            destination: SignUpScreen().navigationBarBackButtonHidden(true),
                             label:{ Text("Not a member?").underline().font(.footnote)
                             })
                     }
                     
                     
                     // Button
-                    tcustomButton(title: "Login", color: "primaryButtonColor")
-                        .onTapGesture {
-                            finishLogin = true
-                        }
+                    Button{
+                        userModel.authenticate(username: email, password: password)
+                    }
+                label: {
+                        tcustomButton(title: "Login", color: "primaryButtonColor")
+                    }
+                    
+                    //                    tcustomButton(title: "Login", color: "primaryButtonColor")
+                    //                        .onTapGesture {
+                    ////                            finishLogin = true
+                    //                            UserModel.authenticate()
+                    //                        }
                     
                     
                     // Or And Sign In With Apple Button
@@ -67,9 +80,9 @@ struct LoginScreen: View {
                 .padding(tdefaultPadding)
             }
             .foregroundColor(.white)
-        }
-        else{
-            MainTabbedView(loged: true)
+            //        }
+            //        else{
+            //            MainTabbedView(loged: true)
         }
     }
 }

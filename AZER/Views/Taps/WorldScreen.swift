@@ -8,41 +8,73 @@
 import SwiftUI
 
 struct WorldScreen: View {
-    let isLoggedin: Bool
-    @State private var isLogged = false
+    //    let isLoggedin: Bool
+    //    @State private var isLogged = false
     @State private var showLoginAlert = false
-
+    
+    let challenges = [
+        "Take a 10 minutes walk",
+        "Sing out loud",
+        "Meditate on candlelight",
+        "Hug the nearest person around",
+        "Pet a stray animal"
+    ]
+    
+    @EnvironmentObject var userModel : UserModel
     
     var body: some View {
-        if !isLogged{
+        NavigationStack{
             ScrollView (showsIndicators: false) {
                 ZStack(alignment: .top) {
                     topBar(height: 260)
+                        .edgesIgnoringSafeArea(.top)
                     VStack (alignment: .leading, spacing: 0) {
-                        // Moods
-                        if !isLoggedin {
-                            scrollableMoodSellection()
-                                .onTapGesture(perform: {
-                                    showLoginAlert = true
-                                })
-                        }
-                        else{
-                            scrollableMoodSellection()
-                        }
-                        
-                        if isLoggedin {
+                        if userModel.authenticated {
+                            // Moods
+//                            ScrollableMoodSelection()
+                            VStack {
+                                Rectangle()
+                                    .frame(height: 190)
+                                    .opacity(0)
+                                
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 12) {
+                                        NavigationLink(
+                                            destination: Challenge(image: "challenge0", challenge: challenges[0]),
+                                            label: {
+                                                Image("Mood0")
+                                                    .resizable()
+                                                    .foregroundColor(.white)
+                                                    .font(.largeTitle)
+                                                    .frame(width: 90, height: 90)
+                                            }
+                                        )
+                                    }
+                                    .padding(.horizontal, tdefaultPadding - 10)
+                                }
+                            }
+                            
                             // 21 days challenge
                             cardWithTitle(
                                 title: "21 days challenge", height: 70,
                                 content: {
                                     VStack(alignment: .leading , spacing: -5) {
-                                        progressBar(height: 20, width: 100, padding: 10)
-                                        
-                                        Text("Day 11 / 21")
-                                            .font(.footnote)
-                                            .padding(.horizontal,12)
-                                            .foregroundColor(.gray)
-                                        
+                                        if let days = userModel.getCurrentUserDays() {
+                                            ProgressBar(height: 20, padding: 10, completedDays: days )
+                                            
+                                            Text("Day \(days) / 21")
+                                                .font(.footnote)
+                                                .padding(.horizontal, 12)
+                                                .foregroundColor(.gray)
+                                        } else {
+                                            ProgressBar(height: 20, padding: 20, completedDays: 0 )
+                                            
+                                            // A default value if days is nil
+                                            Text("Day N/A / 21")
+                                                .font(.footnote)
+                                                .padding(.horizontal, 12)
+                                                .foregroundColor(.gray)
+                                        }
                                     }
                                 }
                             )
@@ -62,10 +94,10 @@ struct WorldScreen: View {
                                         
                                         ScrollView(.horizontal, showsIndicators: false) {
                                             HStack(spacing: 12) {
-                                                ForEach(0..<5) { index in
-                                                    Image("Mood\(index)")
+                                                ForEach(userModel.getLastSixElementsOfCurrentUserArray().suffix(6), id: \.self) { mood in
+                                                    Image("Mood\(mood)")
                                                         .resizable()
-                                                        .foregroundStyle(.white)
+                                                        .foregroundColor(.white)
                                                         .font(.largeTitle)
                                                         .frame(width: 60, height: 60)
                                                 }
@@ -81,13 +113,23 @@ struct WorldScreen: View {
                             // Rooms
                             currentRooms(title: "Allies are up to")
                             
-                        } else {
+                        }
+                        
+                        // MARK: Not Logged in
+                        else {
+                            //Moods
+                            ScrollableMoodSelection()
+                                .onTapGesture(perform: {
+                                    showLoginAlert = true
+                                })
+                            
                             // 21 days challenge
                             cardWithTitle(
                                 title: "21 days challenge", height: 70,
                                 content: {
                                     VStack(alignment: .leading , spacing: -5) {
-                                        progressBar(height: 20, width: 10, padding: 10)
+                                        //                                    progressBar(height: 20, width: 10, padding: 10)
+                                        ProgressBar(height: 20, padding: 10, completedDays: 0 )
                                         
                                         Text("Sign in to start your journey")
                                             .font(.footnote)
@@ -137,22 +179,17 @@ struct WorldScreen: View {
                             title: Text("Login Required"),
                             message: Text("Please log in to access this content."),
                             primaryButton: .default(Text("Log In"), action: {
-                                isLogged = true
+                                //                                isLogged = true
                             }),
                             secondaryButton: .cancel()
                         )
                     }
                 }
             }
-            .edgesIgnoringSafeArea(.top)
-        }
-        else{
-            LoginScreen()
         }
     }
-    
 }
 
 #Preview {
-    WorldScreen(isLoggedin: false)
+    WorldScreen()
 }

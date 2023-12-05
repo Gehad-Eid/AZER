@@ -32,7 +32,8 @@ struct OnboardingScreen: View {
             }
         else{
 //            LoginScreen()
-            MainTabbedView(loged: false)
+            MainTabbedView()
+//            Wrapper()
         }
 //        }
     }

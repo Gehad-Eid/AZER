@@ -47,22 +47,23 @@ struct bgColor: View {
 // Custom tab item modifier
 extension MainTabbedView{
     func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View{
-        HStack(spacing: 10){
-            Spacer()
+        VStack(spacing: 10){
+//            Spacer()
             Image(imageName)
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(isActive ? .black : .gray)
+                .foregroundColor(isActive ? Color("primaryButtonColor") : .black)
                 .frame(width: 20, height: 20)
-            if isActive{
+//            if isActive{
                 Text(title)
                     .font(.system(size: 14))
-                    .foregroundColor(isActive ? .black : .gray)
-            }
-            Spacer()
+                    .foregroundColor(isActive ? Color("primaryButtonColor") : .black)
+//            }
+//            Spacer()
         }
-        .frame(width: isActive ? .infinity : 60, height: 60)
-        .background(isActive ? Color("primaryButtonColor").opacity(0.4) : .clear)
-        .cornerRadius(30) //tcornerRadius
+        .frame(width: 60, height: 60)
+//        .frame(width: 60, height: 60) //isActive ? .infinity :
+//        .background(Color("primaryButtonColor").opacity(0.4) /*: .clear*/) //isActive ?
+//        .cornerRadius(30) //tcornerRadius
     }
 }

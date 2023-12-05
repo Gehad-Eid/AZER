@@ -10,9 +10,11 @@ import SwiftUI
 
 @main
 struct AZERApp: App {
+    @StateObject var userModel = UserModel()
+    
     var body: some Scene {
         WindowGroup {
-            SplashScreen()
+            SplashScreen().environmentObject(userModel)
         }
     }
 }

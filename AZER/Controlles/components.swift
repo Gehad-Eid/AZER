@@ -199,91 +199,112 @@ struct topBar: View {
 
 
 // Scrollable Mood Sellection
-struct scrollableMoodSellection: View {
-    
-    let challenges = ["Take a 10 minutes walk",
-                     "Sing out loud",
-                     "Meditate on candlelight",
-                     "Hug the nearest person around",
-                     "Pet a stray animal"]
+struct ScrollableMoodSelection: View {
+    let challenges = [
+        "Take a 10 minutes walk",
+        "Sing out loud",
+        "Meditate on candlelight",
+        "Hug the nearest person around",
+        "Pet a stray animal"
+    ]
     
     var body: some View {
-        VStack {
-            Rectangle()
-                .frame(width: .infinity, height: 190)
-                .opacity(0)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(0..<5) { index in
-                        NavigationLink(
-                            destination: Challenge(image: "challenge\(index)", challenge: challenges[index]),
-                            label: {
-                                Image("Mood\(index)")
-                                    .resizable()
-                                    .foregroundStyle(.white)
-                                    .font(.largeTitle)
-                                    .frame(width: 90, height: 90)
-                            }
-                        )
+//        NavigationView{
+            VStack {
+                Rectangle()
+                    .frame(height: 190)
+                    .opacity(0)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        MoodNavigationLink(index: 0, challenge: challenges[0])
+                        MoodNavigationLink(index: 1, challenge: challenges[1])
+                        MoodNavigationLink(index: 2, challenge: challenges[2])
+                        MoodNavigationLink(index: 3, challenge: challenges[3])
+                        MoodNavigationLink(index: 4, challenge: challenges[4])
                     }
+                    .padding(.horizontal, tdefaultPadding - 10)
                 }
-                .padding(.horizontal, tdefaultPadding - 10)
             }
-        }
+//        }
     }
 }
 
-// Custom user room cards
-struct currentRooms: View {
-    let title : String
+struct MoodNavigationLink: View {
+    let index: Int
+    let challenge: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10){
+        NavigationLink(
+            destination: Challenge(image: "challenge\(index)", challenge: challenge),
+            label: {
+                Image("Mood\(index)")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .frame(width: 90, height: 90)
+            }
+        )
+    }
+}
+
+
+
+// Custom user room cards
+struct currentRooms: View {
+    let title: String
+    
+    @EnvironmentObject var userModel: UserModel
+    @State private var selectedRoom: Room?
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
             Text(title)
-//                .foregroundColor(Color("sublinesColor"))
-                .padding(.horizontal,tdefaultPadding)
+                .padding(.horizontal, tdefaultPadding)
                 .padding(.top, tdefaultPadding)
                 .font(.title2)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    let rooms = ["Room name 1",
-                                 "Room name 2",
-                                 "Room name 3"]
-                    
-                    let roomsExplanation = ["Room explanation 1",
-                                            "Room explanation 2",
-                                            "Room explanation 3"]
-                    
-                    ForEach(0..<3) { index in
-                        ZStack{
-                            RoundedRectangle(cornerRadius: tcornerRadius)
-                                .fill(Color("roomCardColor"))
-                                .frame(width: 150, height: 210)
-                            VStack (alignment: .leading) {
-                                Spacer()
-                                
-                                Image("room\(index)")
-                                    .resizable()
-                                    .frame(maxWidth: 120, maxHeight: 100)
-                                
-                                Spacer()
-                                
-                                Text(rooms[index])
-                                    .font(.title3)
-                                    .foregroundColor(.white)
-                                
-                                Text(roomsExplanation[index])
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                                
-                                Spacer()
+                    ForEach(userModel.users[userModel.currentUserIndex].rooms, id: \.self) { room in
+                        // Use NavigationLink to navigate to RoomView when tapped
+                        NavigationLink(
+                            destination: RoomScreen(room: room),
+                            tag: room,
+                            selection: $selectedRoom,
+                            label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: tcornerRadius)
+                                        .fill(Color("roomCardColor"))
+                                        .frame(width: 150, height: 210)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Spacer()
+                                        Image("room\(Int.random(in: 0..<3))")
+                                            .resizable()
+                                            .frame(maxWidth: 120, maxHeight: 100)
+                                        
+                                        Spacer()
+                                        
+                                        Text(room.name)
+                                            .font(.title3)
+                                            .foregroundColor(.white)
+                                        
+                                        Text(room.description)
+                                            .font(.footnote)
+                                            .foregroundColor(.white)
+                                        
+                                        Spacer()
+                                    }
+                                }
+                                .onTapGesture {
+                                    selectedRoom = room
+                                }
                             }
-                        }
+                        )
                     }
                 }
-                .padding(.horizontal,tdefaultPadding)
+                .padding(.horizontal, tdefaultPadding)
             }
         }
     }
@@ -291,21 +312,25 @@ struct currentRooms: View {
 
 
 // Custom progress bar
-struct progressBar: View {
+struct ProgressBar: View {
     
-    let height : CGFloat
-    let width : CGFloat
-    let padding : CGFloat
+    let height: CGFloat
+    let padding: CGFloat
+    let completedDays: Int
+    let totalDays: Int = 21 // Total number of days
     
     var body: some View {
-        ZStack (alignment: .leading){
+        let progress = CGFloat(completedDays) / CGFloat(totalDays)
+        let calculatedWidth = (UIScreen.main.bounds.width - 2 * padding) * progress
+        
+        ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: height, style: .continuous)
                 .frame(width: .infinity, height: height)
-                .foregroundColor(.black.opacity(0.1))
+                .foregroundColor(Color.black.opacity(0.1))
                 .padding(padding)
             
             RoundedRectangle(cornerRadius: height, style: .continuous)
-                .frame(width: width, height: height)
+                .frame(width: calculatedWidth, height: height)
                 .background(
                     LinearGradient(
                         gradient: Gradient(stops: [
@@ -315,13 +340,14 @@ struct progressBar: View {
                         startPoint: .leading,
                         endPoint: .trailing
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: tcornerRadius, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: height, style: .continuous))
                 )
                 .foregroundColor(.clear)
                 .padding(padding)
         }
     }
 }
+
 
 // Friends widget
 struct friends: View {
