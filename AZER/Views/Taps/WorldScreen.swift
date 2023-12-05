@@ -29,7 +29,7 @@ struct WorldScreen: View {
         "Pet a stray animal"
     ]
     
-    @State private var selectedChallenge: String?
+    @State private var selectedChallenge: Int?
     @State private var isSheetPresented = false
     
     var body: some View {
@@ -57,88 +57,17 @@ struct WorldScreen: View {
                                                 .frame(width: 90, height: 90)
                                                 .onTapGesture {
                                                     isSheetPresented.toggle()
+                                                    selectedChallenge = index
                                                 }
                                                 .sheet(isPresented: $isSheetPresented){
-                                                    //Challenge(image: "Mood0", challenge: "Mood0")
-                                                    Challenge(image: "challenge\(index)", challenge: challenges[index])
+                                                    Challenge(image: "challenge\(selectedChallenge ?? 0)", challenge: challenges[selectedChallenge ?? 0])
                                                 }
                                         }
-                                    
-                                        Image("Mood1")
-                                           .resizable()
-                                           .foregroundStyle(.white)
-                                           .font(.largeTitle)
-                                           .frame(width: 90, height: 90)
-                                           .onTapGesture {
-                                               isSheetPresented.toggle()
-                                           }
-                                           .sheet(isPresented: $isSheetPresented){
-                //                               Challenge(image: "Mood0", challenge: "Mood0")
-                                               Challenge(image: "challenge1", challenge: challenges[1])
-                                           }
-                                        Image("Mood2")
-                                           .resizable()
-                                           .foregroundStyle(.white)
-                                           .font(.largeTitle)
-                                           .frame(width: 90, height: 90)
-                                           .onTapGesture {
-                                               isSheetPresented.toggle()
-                                           }
-                                           .sheet(isPresented: $isSheetPresented){
-                //                               Challenge(image: "Mood0", challenge: "Mood0")
-                                               Challenge(image: "challenge2", challenge: challenges[2])
-                                           }
-                                        Image("Mood3")
-                                           .resizable()
-                                           .foregroundStyle(.white)
-                                           .font(.largeTitle)
-                                           .frame(width: 90, height: 90)
-                                           .onTapGesture {
-                                               isSheetPresented.toggle()
-                                           }
-                                           .sheet(isPresented: $isSheetPresented){
-                //                               Challenge(image: "Mood0", challenge: "Mood0")
-                                               Challenge(image: "challenge3", challenge: challenges[3])
-                                           }
-                                        Image("Mood4")
-                                           .resizable()
-                                           .foregroundStyle(.white)
-                                           .font(.largeTitle)
-                                           .frame(width: 90, height: 90)
-                                           .onTapGesture {
-                                               isSheetPresented.toggle()
-                                           }
-                                           .sheet(isPresented: $isSheetPresented){
-                //                               Challenge(image: "Mood0", challenge: "Mood0")
-                                               Challenge(image: "challenge4", challenge: challenges[4])
-                                           }
-                                        
-                                        }
                                     }
-                                    .padding(.horizontal, tdefaultPadding - 10)
                                 }
+                                .padding(.horizontal, tdefaultPadding - 10)
+                            }
                             
-                        
-//                            VStack{
-//                                Rectangle()
-//                                    .frame(height: 190)
-//                                    .opacity(0)
-//                                ScrollView(.horizontal, showsIndicators: false){
-//                                    HStack(spacing: 12){
-//                                        Image("Mood0")
-//                                            .resizable()
-//                                            .foregroundColor(.white)
-//                                            .font(.largeTitle)
-//                                            .frame(width: 90, height: 90)
-//                                            .onTapGesture {
-//                                                isSheetPresented.toggle()
-//                                            }
-//                                            .sheet(isPresented: $isSheetPresented){
-//                                                Challenge(image: "Mood0", challenge: "Mood0")
-//                                            }
-//                                    }
-//                                }
-//                            }
                             
                             // 21 days challenge
                             cardWithTitle(
