@@ -162,7 +162,7 @@ struct doubleWave: View {
 // Custom top bar
 struct topBar: View {
     let height : CGFloat
-    
+    @EnvironmentObject var userModel : UserModel
     var body: some View {
         ZStack {
             UnevenRoundedRectangle(
@@ -170,7 +170,7 @@ struct topBar: View {
                                    bottomTrailing: 120)
             )
             .fill(Color("BackgoundDecoration"))
-            .frame(width: .infinity, height: height)
+            .frame(height: height) //width: .infinity,
             
             HStack{
                 Image("Logo")
@@ -183,12 +183,19 @@ struct topBar: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("Hi there!")
-                        .font(.title)
-                        .foregroundColor(Color("HeadlineColor"))
-                    
-                    Text("Ready to change your mood?")
-                        .foregroundColor(.black.opacity(0.7))
+                    if let usermane = userModel.getCurrentUsername(){
+                        Text("Hi \(usermane)!")
+                            .font(.title)
+                            .foregroundColor(Color("HeadlineColor"))
+                    }
+                    else{
+                        Text("Hi there!")
+                            .font(.title)
+                            .foregroundColor(Color("HeadlineColor"))
+                    }
+                        
+                        Text("Ready to change your mood?")
+                            .foregroundColor(.black.opacity(0.7))
                 }
             }
             .padding(tdefaultPadding)
@@ -200,51 +207,49 @@ struct topBar: View {
 
 // Scrollable Mood Sellection
 struct ScrollableMoodSelection: View {
-    let challenges = [
-        "Take a 10 minutes walk",
-        "Sing out loud",
-        "Meditate on candlelight",
-        "Hug the nearest person around",
-        "Pet a stray animal"
-    ]
+    @Binding var isSheetPresented : Bool
+    let challenges = ["Take a 10 minutes walk",
+                      "Sing out loud",
+                      "Meditate on candlelight",
+                      "Hug the nearest person around",
+                      "Pet a stray animal"]
     
     var body: some View {
-//        NavigationView{
-            VStack {
-                Rectangle()
-                    .frame(height: 190)
-                    .opacity(0)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        MoodNavigationLink(index: 0, challenge: challenges[0])
-                        MoodNavigationLink(index: 1, challenge: challenges[1])
-                        MoodNavigationLink(index: 2, challenge: challenges[2])
-                        MoodNavigationLink(index: 3, challenge: challenges[3])
-                        MoodNavigationLink(index: 4, challenge: challenges[4])
+        VStack {
+            Rectangle()
+                .frame(width: .infinity, height: 190)
+                .opacity(0)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(0..<7) { index in
+//                        NavigationLink(
+//                            destination: Challenge(image: "challenge\(index)", challenge: challenges[index]),
+//                            label: {
+//                                Image("Mood\(index)")
+//                                    .resizable()
+//                                    .foregroundStyle(.white)
+//                                    .font(.largeTitle)
+//                                    .frame(width: 90, height: 90)
+//                            }
+//                        )
+                        Image("Mood\(index)")
+                           .resizable()
+                           .foregroundStyle(.white)
+                           .font(.largeTitle)
+                           .frame(width: 90, height: 90)
+                           .onTapGesture {
+                               isSheetPresented.toggle()
+                           }
+                           .sheet(isPresented: $isSheetPresented){
+//                               Challenge(image: "Mood0", challenge: "Mood0")
+                               Challenge(image: "challenge\(index)", challenge: challenges[index])
+                           }
                     }
-                    .padding(.horizontal, tdefaultPadding - 10)
                 }
+                .padding(.horizontal, tdefaultPadding - 10)
             }
-//        }
-    }
-}
-
-struct MoodNavigationLink: View {
-    let index: Int
-    let challenge: String
-    
-    var body: some View {
-        NavigationLink(
-            destination: Challenge(image: "challenge\(index)", challenge: challenge),
-            label: {
-                Image("Mood\(index)")
-                    .resizable()
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
-                    .frame(width: 90, height: 90)
-            }
-        )
+        }
     }
 }
 
@@ -325,7 +330,7 @@ struct ProgressBar: View {
         
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: height, style: .continuous)
-                .frame(width: .infinity, height: height)
+                .frame(height: height)//width: .infinity,
                 .foregroundColor(Color.black.opacity(0.1))
                 .padding(padding)
             
@@ -401,7 +406,7 @@ struct cardWithTitle<Content: View>: View {
             ZStack{
                 RoundedRectangle(cornerRadius: tcornerRadius)
                     .fill(.gray.opacity(0.2))
-                    .frame(width: .infinity, height: height)
+                    .frame(height: height)//width: .infinity, 
                 
                 // Whatever custom view we need to add on the card
                 contentView

@@ -22,7 +22,7 @@ struct Challenge: View {
                                        bottomTrailing: 120)
                 )
                 .fill(Color("BackgoundDecoration"))
-                .frame(width: .infinity, height: 550)
+                .frame(height: 550) // width
                 
                 // The challenge
                 VStack {

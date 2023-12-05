@@ -12,6 +12,15 @@ struct WorldScreen: View {
     //    @State private var isLogged = false
     @State private var showLoginAlert = false
     
+//    let challenges = [
+//        "Take a 10 minutes walk",
+//        "Sing out loud",
+//        "Meditate on candlelight",
+//        "Hug the nearest person around",
+//        "Pet a stray animal"
+//    ]
+//    
+    @EnvironmentObject var userModel : UserModel
     let challenges = [
         "Take a 10 minutes walk",
         "Sing out loud",
@@ -20,7 +29,8 @@ struct WorldScreen: View {
         "Pet a stray animal"
     ]
     
-    @EnvironmentObject var userModel : UserModel
+    @State private var selectedChallenge: String?
+    @State private var isSheetPresented = false
     
     var body: some View {
         NavigationStack{
@@ -31,7 +41,7 @@ struct WorldScreen: View {
                     VStack (alignment: .leading, spacing: 0) {
                         if userModel.authenticated {
                             // Moods
-//                            ScrollableMoodSelection()
+//                            ScrollableMoodSelection(isSheetPresented: $isSheetPresented)
                             VStack {
                                 Rectangle()
                                     .frame(height: 190)
@@ -39,20 +49,96 @@ struct WorldScreen: View {
                                 
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 12) {
-                                        NavigationLink(
-                                            destination: Challenge(image: "challenge0", challenge: challenges[0]),
-                                            label: {
-                                                Image("Mood0")
-                                                    .resizable()
-                                                    .foregroundColor(.white)
-                                                    .font(.largeTitle)
-                                                    .frame(width: 90, height: 90)
-                                            }
-                                        )
+                                        ForEach(0..<5) { index in
+                                            Image("Mood\(index)")
+                                                .resizable()
+                                                .foregroundStyle(.white)
+                                                .font(.largeTitle)
+                                                .frame(width: 90, height: 90)
+                                                .onTapGesture {
+                                                    isSheetPresented.toggle()
+                                                }
+                                                .sheet(isPresented: $isSheetPresented){
+                                                    //Challenge(image: "Mood0", challenge: "Mood0")
+                                                    Challenge(image: "challenge\(index)", challenge: challenges[index])
+                                                }
+                                        }
+                                    
+                                        Image("Mood1")
+                                           .resizable()
+                                           .foregroundStyle(.white)
+                                           .font(.largeTitle)
+                                           .frame(width: 90, height: 90)
+                                           .onTapGesture {
+                                               isSheetPresented.toggle()
+                                           }
+                                           .sheet(isPresented: $isSheetPresented){
+                //                               Challenge(image: "Mood0", challenge: "Mood0")
+                                               Challenge(image: "challenge1", challenge: challenges[1])
+                                           }
+                                        Image("Mood2")
+                                           .resizable()
+                                           .foregroundStyle(.white)
+                                           .font(.largeTitle)
+                                           .frame(width: 90, height: 90)
+                                           .onTapGesture {
+                                               isSheetPresented.toggle()
+                                           }
+                                           .sheet(isPresented: $isSheetPresented){
+                //                               Challenge(image: "Mood0", challenge: "Mood0")
+                                               Challenge(image: "challenge2", challenge: challenges[2])
+                                           }
+                                        Image("Mood3")
+                                           .resizable()
+                                           .foregroundStyle(.white)
+                                           .font(.largeTitle)
+                                           .frame(width: 90, height: 90)
+                                           .onTapGesture {
+                                               isSheetPresented.toggle()
+                                           }
+                                           .sheet(isPresented: $isSheetPresented){
+                //                               Challenge(image: "Mood0", challenge: "Mood0")
+                                               Challenge(image: "challenge3", challenge: challenges[3])
+                                           }
+                                        Image("Mood4")
+                                           .resizable()
+                                           .foregroundStyle(.white)
+                                           .font(.largeTitle)
+                                           .frame(width: 90, height: 90)
+                                           .onTapGesture {
+                                               isSheetPresented.toggle()
+                                           }
+                                           .sheet(isPresented: $isSheetPresented){
+                //                               Challenge(image: "Mood0", challenge: "Mood0")
+                                               Challenge(image: "challenge4", challenge: challenges[4])
+                                           }
+                                        
+                                        }
                                     }
                                     .padding(.horizontal, tdefaultPadding - 10)
                                 }
-                            }
+                            
+                        
+//                            VStack{
+//                                Rectangle()
+//                                    .frame(height: 190)
+//                                    .opacity(0)
+//                                ScrollView(.horizontal, showsIndicators: false){
+//                                    HStack(spacing: 12){
+//                                        Image("Mood0")
+//                                            .resizable()
+//                                            .foregroundColor(.white)
+//                                            .font(.largeTitle)
+//                                            .frame(width: 90, height: 90)
+//                                            .onTapGesture {
+//                                                isSheetPresented.toggle()
+//                                            }
+//                                            .sheet(isPresented: $isSheetPresented){
+//                                                Challenge(image: "Mood0", challenge: "Mood0")
+//                                            }
+//                                    }
+//                                }
+//                            }
                             
                             // 21 days challenge
                             cardWithTitle(
@@ -118,7 +204,7 @@ struct WorldScreen: View {
                         // MARK: Not Logged in
                         else {
                             //Moods
-                            ScrollableMoodSelection()
+                            ScrollableMoodSelection(isSheetPresented: $isSheetPresented)
                                 .onTapGesture(perform: {
                                     showLoginAlert = true
                                 })
