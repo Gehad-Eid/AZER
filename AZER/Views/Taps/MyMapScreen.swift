@@ -15,7 +15,7 @@ struct MyMapScreen: View {
                     ZStack (alignment: .top){
                         VStack {
                             Rectangle()
-                                .frame(width: .infinity, height: 160)
+                                .frame(height: 160) //width: .infinity,
                                 .opacity(0)
                             
                             Image("Map")
@@ -26,7 +26,7 @@ struct MyMapScreen: View {
                         ZStack {
                             Rectangle()
                                 .fill(Color("BackgoundDecoration"))
-                                .frame(width: .infinity, height: 170)
+                                .frame( height: 170) //width: .infinity,
                             
                             HStack{
                                 Image("Logo")

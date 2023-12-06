@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct WorldScreen: View {
-    //    let isLoggedin: Bool
-    //    @State private var isLogged = false
     @State private var showLoginAlert = false
+    @State private var selectedChallenge: Int?
+    @State private var isSheetPresented = false
+    @State private var isLoginSheetPresented = false
+
+    @State private var selectedRoom: Room?
     
-//    let challenges = [
-//        "Take a 10 minutes walk",
-//        "Sing out loud",
-//        "Meditate on candlelight",
-//        "Hug the nearest person around",
-//        "Pet a stray animal"
-//    ]
-//    
     @EnvironmentObject var userModel : UserModel
+    
     let challenges = [
         "Take a 10 minutes walk",
         "Sing out loud",
@@ -29,19 +25,17 @@ struct WorldScreen: View {
         "Pet a stray animal"
     ]
     
-    @State private var selectedChallenge: Int?
-    @State private var isSheetPresented = false
-    
     var body: some View {
         NavigationStack{
             ScrollView (showsIndicators: false) {
                 ZStack(alignment: .top) {
                     topBar(height: 260)
                         .edgesIgnoringSafeArea(.top)
+                    
                     VStack (alignment: .leading, spacing: 0) {
                         if userModel.authenticated {
+                            
                             // Moods
-//                            ScrollableMoodSelection(isSheetPresented: $isSheetPresented)
                             VStack {
                                 Rectangle()
                                     .frame(height: 190)
@@ -68,7 +62,12 @@ struct WorldScreen: View {
                                 .padding(.horizontal, tdefaultPadding - 10)
                             }
                             
-                            
+                            Button{
+                                userModel.logOut()
+                            }
+                                label:{
+                                Text("logout")
+                            }
                             // 21 days challenge
                             cardWithTitle(
                                 title: "21 days challenge", height: 70,
@@ -128,15 +127,74 @@ struct WorldScreen: View {
                             // Rooms
                             currentRooms(title: "Allies are up to")
                             
+                            //
+//                            VStack(alignment: .leading, spacing: 10) {
+//                                Text("Allies are up to")
+//                                    .padding(.horizontal, tdefaultPadding)
+//                                    .padding(.top, tdefaultPadding)
+//                                    .font(.title2)
+//                                
+//                                ScrollView(.horizontal, showsIndicators: false) {
+//                                    HStack(spacing: 12) {
+//                                        ForEach(userModel.users[userModel.currentUserIndex].rooms, id: \.self) { room in
+//                                            ZStack {
+//                                                RoundedRectangle(cornerRadius: tcornerRadius)
+//                                                    .fill(Color("roomCardColor"))
+//                                                    .frame(width: 150, height: 210)
+//                                                
+//                                                VStack(alignment: .leading) {
+//                                                    Spacer()
+//                                                    Image("room\(Int.random(in: 0..<3))")
+//                                                        .resizable()
+//                                                        .frame(maxWidth: 120, maxHeight: 100)
+//                                                    
+//                                                    Spacer()
+//                                                    
+//                                                    Text(room.name)
+//                                                        .font(.title3)
+//                                                        .foregroundColor(.white)
+//                                                    
+//                                                    Text(room.description)
+//                                                        .font(.footnote)
+//                                                        .foregroundColor(.white)
+//                                                    
+//                                                    Spacer()
+//                                                }
+//                                            }
+//                                            .onTapGesture {
+//                                                selectedRoom = room
+//                                                isSheetPresented.toggle()
+//                                            }
+//                                            .sheet(isPresented: $isSheetPresented){
+//                                                RoomScreen(room: $selectedRoom)
+//                                            }
+//                                        }
+//                                    }
+//                                    .padding(.horizontal, tdefaultPadding)
+//                                }
+//                            }
                         }
                         
                         // MARK: Not Logged in
                         else {
                             //Moods
-                            ScrollableMoodSelection(isSheetPresented: $isSheetPresented)
+                            ScrollableMoodSelection()
                                 .onTapGesture(perform: {
                                     showLoginAlert = true
                                 })
+                                .alert(isPresented: $showLoginAlert) {
+                                    Alert(
+                                        title: Text("Login Required"),
+                                        message: Text("Please log in to access this content."),
+                                        primaryButton: .default(Text("Log In"), action: {
+                                            isLoginSheetPresented.toggle()
+                                        }),
+                                        secondaryButton: .cancel()
+                                    )
+                                }
+                                .sheet(isPresented: $isLoginSheetPresented){
+                                    LoginScreen()
+                                }
                             
                             // 21 days challenge
                             cardWithTitle(
@@ -189,22 +247,13 @@ struct WorldScreen: View {
                             )
                         }
                     }
-                    .alert(isPresented: $showLoginAlert) {
-                        Alert(
-                            title: Text("Login Required"),
-                            message: Text("Please log in to access this content."),
-                            primaryButton: .default(Text("Log In"), action: {
-                                //                                isLogged = true
-                            }),
-                            secondaryButton: .cancel()
-                        )
-                    }
+                    //
                 }
             }
         }
     }
 }
 
-#Preview {
-    WorldScreen()
-}
+//#Preview {
+//    WorldScreen(selectedRoom: Room(name: "test", description: "test test", people: ["ppl 1","ppl2"], challenge: "challenge"))
+//}

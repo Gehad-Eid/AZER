@@ -57,26 +57,28 @@ struct Room: Codable, Hashable {
 
 struct User: Codable {
     var username: String
-    var email: String
+//    var email: String
     var password: String
     var days: Int
     var moods: [Int]
     var rooms: [Room]
     var friends: [String]
+    var timeRemaining: Int
 
-    init(username: String, email: String, password: String, days: Int = 0, moods: [Int] = [], rooms: [Room] = [], friends: [String] = []) {
+    init(username: String, /*email: String,*/ password: String, days: Int = 0, moods: [Int] = [], rooms: [Room] = [], friends: [String] = [], timeRemaining : Int = 100) {
         self.username = username
-        self.email = email
+//        self.email = email
         self.password = password
         self.days = days
         self.moods = moods
         self.rooms = rooms
         self.friends = friends
+        self.timeRemaining = timeRemaining
     }
 }
 
 class UserModel: ObservableObject {
-    @AppStorage("AUTH_KEY") var authenticated = true {
+    @AppStorage("AUTH_KEY") var authenticated = false {
            willSet { objectWillChange.send() }
        }
        
@@ -86,7 +88,7 @@ class UserModel: ObservableObject {
     init() {
         let sampleUser = User(
             username: "SampleUser",
-            email: "sample@example.com",
+//            email: "sample@example.com",
             password: "password",
             days: 11,
             moods: [1, 2, 3, 4, 5, 0, 4], // Example moods array
@@ -94,7 +96,8 @@ class UserModel: ObservableObject {
                 Room(name: "Room1", description: "Room 1 Description", people: [], challenge: "Challenge 1"),
                 Room(name: "Room2", description: "Room 2 Description", people: [], challenge: "Challenge 2")
             ],
-            friends: ["Friend1", "Friend2"]
+            friends: ["Friend1", "Friend2"],
+            timeRemaining: 5*60
         )
         
         // Appending the sample user to the users array
@@ -146,33 +149,11 @@ class UserModel: ObservableObject {
     }
 
         // Function to add a new user to the users array and save it
-    func addUser(username: String, email: String, password: String) {
-        let newUser = User(username: username, email: email, password: password)
+    func addUser(username: String, /*email: String,*/ password: String) {
+        let newUser = User(username: username, password: password) /* email: email,*/
         users.append(newUser)
         saveUsers() // Save the updated users array to UserDefaults
     }
-        
-//    func addUser(username: String, email: String, password: String) {
-//        let newUser = User(username: username, email: email, password: password)
-//        users.append(newUser)
-//        
-//        // Save updated users array to UserDefaults
-//        let encoder = JSONEncoder()
-//        if let encodedUsers = try? encoder.encode(users) {
-//            UserDefaults.standard.set(encodedUsers, forKey: "USERS_KEY")
-//        }
-//        
-//        // Debugging
-//        print("Currently logged on: \(authenticated)")
-//        print("Users: \(users)")
-//    }
-    
-//    func saveUsers() {
-//        let encoder = JSONEncoder()
-//        if let encodedUsers = try? encoder.encode(users) {
-//            UserDefaults.standard.set(encodedUsers, forKey: "USERS_KEY")
-//        }
-//    }
     
     // Function to get the username of the current user
     func getCurrentUsername() -> String? {
@@ -186,15 +167,15 @@ class UserModel: ObservableObject {
     }
     
     // Function to get the email of the current user
-    func getCurrentUserEmail() -> String? {
-        guard currentUserIndex >= 0, currentUserIndex < users.count else {
-            // Return nil if the current user index is out of bounds
-            return nil
-        }
-        
-        let currentUserEmail = users[currentUserIndex].email
-        return currentUserEmail
-    }
+//    func getCurrentUserEmail() -> String? {
+//        guard currentUserIndex >= 0, currentUserIndex < users.count else {
+//            // Return nil if the current user index is out of bounds
+//            return nil
+//        }
+//        
+//        let currentUserEmail = users[currentUserIndex].email
+//        return currentUserEmail
+//    }
     
     // Function to get the last 6 elements of the userArray of the current user
     func getLastSixElementsOfCurrentUserArray() -> [Int] {
@@ -225,6 +206,29 @@ class UserModel: ObservableObject {
         return currentUserDays
     }
     
+    // Function to get the remaining time of the current user
+    func getCurrentUserRemainingTime() -> Int? {
+        guard currentUserIndex >= 0, currentUserIndex < users.count else {
+            // Return nil if the current user index is out of bounds
+            return nil
+        }
+        
+        let remainingTime = users[currentUserIndex].timeRemaining
+        return remainingTime
+    }
+    
+    // Function to set the remaining time for the current user
+    func setCurrentUserRemainingTime(time: Int) {
+        guard currentUserIndex >= 0, currentUserIndex < users.count else {
+            // Return if the current user index is out of bounds
+            return
+        }
+        
+        users[currentUserIndex].timeRemaining = time
+        saveUsers() // Save the updated users array to UserDefaults after setting the time
+    }
+
+
     func logOut() {
         authenticated = false
     }

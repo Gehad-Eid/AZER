@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RoomScreen: View {
-    let room: Room
+    @Binding var room: Room?
     
     var body: some View {
         VStack {
@@ -17,10 +17,10 @@ struct RoomScreen: View {
                 .padding()
             
             // Display room details
-            Text("Name: \(room.name)")
+            Text("Name: \(room!.name)")
                 .padding()
             
-            Text("Description: \(room.description)")
+            Text("Description: \(room!.description)")
                 .padding()
             
             // You can add more room details here as needed
@@ -32,6 +32,6 @@ struct RoomScreen: View {
 
 
 
-#Preview {
-    RoomScreen(room: Room(name: "test", description: "test test", people: [], challenge: "challenge"))
-}
+//#Preview {
+//    RoomScreen(room: Room(name: "test", description: "test test", people: [], challenge: "challenge"))
+//}

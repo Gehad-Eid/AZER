@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUpScreen: View {
-    @State private var email  = ""
+//    @State private var email  = ""
     @State private var username  = ""
     @State private var password  = ""
     @State private var confirmPassword  = ""
@@ -30,7 +30,7 @@ struct SignUpScreen: View {
                     Spacer()
                     
                     // Email
-                    tcustomTextfeild(text: $email, placeholder: "Enter your email", imageName: "envelope.fill")
+//                    tcustomTextfeild(text: $email, placeholder: "Enter your email", imageName: "envelope.fill")
                     
                     // Username
                     tcustomTextfeild(text: $username, placeholder: "Enter username", imageName: "person.fill")
@@ -49,7 +49,7 @@ struct SignUpScreen: View {
 //                    NavigationLink(
 //                        destination: MainTabbedView(loged: true),
                     Button{
-                        userModel.addUser(username: username, email: email, password: password)
+                        userModel.addUser(username: username, password: password)
                     }
                         label:{ tcustomButton(title: "Sign Up", color: "primaryButtonColor")
                             

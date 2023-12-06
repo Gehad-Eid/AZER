@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @State private var email  = ""
+    @State private var username  = ""
     @State private var password  = ""
+    
     @EnvironmentObject var userModel : UserModel
     
-//    @State var finishLogin = false
-
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
-            //        if !finishLogin {
             ZStack{
                 // Back ground color
                 bgColor()
@@ -32,7 +32,7 @@ struct LoginScreen: View {
                     Spacer()
                     
                     // Email
-                    tcustomTextfeild(text: $email, placeholder: "Email", imageName: "envelope.fill")
+                    tcustomTextfeild(text: $username, placeholder: "username", imageName: "envelope.fill")
                         .autocapitalization(.none)
                     
                     // Password
@@ -57,18 +57,13 @@ struct LoginScreen: View {
                     
                     // Button
                     Button{
-                        userModel.authenticate(username: email, password: password)
+                        userModel.authenticate(username: username, password: password)
+                        dismiss()
                     }
                 label: {
                         tcustomButton(title: "Login", color: "primaryButtonColor")
                     }
-                    
-                    //                    tcustomButton(title: "Login", color: "primaryButtonColor")
-                    //                        .onTapGesture {
-                    ////                            finishLogin = true
-                    //                            UserModel.authenticate()
-                    //                        }
-                    
+                .disabled(password.isEmpty)
                     
                     // Or And Sign In With Apple Button
                     customOrAndSignInWithAppleButton()
@@ -80,9 +75,6 @@ struct LoginScreen: View {
                 .padding(tdefaultPadding)
             }
             .foregroundColor(.white)
-            //        }
-            //        else{
-            //            MainTabbedView(loged: true)
         }
     }
 }

@@ -207,7 +207,7 @@ struct topBar: View {
 
 // Scrollable Mood Sellection
 struct ScrollableMoodSelection: View {
-    @Binding var isSheetPresented : Bool
+//    @Binding var isSheetPresented : Bool
     let challenges = ["Take a 10 minutes walk",
                       "Sing out loud",
                       "Meditate on candlelight",
@@ -222,7 +222,7 @@ struct ScrollableMoodSelection: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(0..<7) { index in
+                    ForEach(0..<5) { index in
 //                        NavigationLink(
 //                            destination: Challenge(image: "challenge\(index)", challenge: challenges[index]),
 //                            label: {
@@ -238,13 +238,13 @@ struct ScrollableMoodSelection: View {
                            .foregroundStyle(.white)
                            .font(.largeTitle)
                            .frame(width: 90, height: 90)
-                           .onTapGesture {
-                               isSheetPresented.toggle()
-                           }
-                           .sheet(isPresented: $isSheetPresented){
-//                               Challenge(image: "Mood0", challenge: "Mood0")
-                               Challenge(image: "challenge\(index)", challenge: challenges[index])
-                           }
+//                           .onTapGesture {
+//                               isSheetPresented.toggle()
+//                           }
+//                           .sheet(isPresented: $isSheetPresented){
+////                               Challenge(image: "Mood0", challenge: "Mood0")
+//                               Challenge(image: "challenge\(index)", challenge: challenges[index])
+//                           }
                     }
                 }
                 .padding(.horizontal, tdefaultPadding - 10)
@@ -260,7 +260,7 @@ struct currentRooms: View {
     let title: String
     
     @EnvironmentObject var userModel: UserModel
-    @State private var selectedRoom: Room?
+//    @State private var selectedRoom: Room?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -273,11 +273,11 @@ struct currentRooms: View {
                 HStack(spacing: 12) {
                     ForEach(userModel.users[userModel.currentUserIndex].rooms, id: \.self) { room in
                         // Use NavigationLink to navigate to RoomView when tapped
-                        NavigationLink(
-                            destination: RoomScreen(room: room),
-                            tag: room,
-                            selection: $selectedRoom,
-                            label: {
+//                        NavigationLink(
+//                            destination: RoomScreen(room: $selectedRoom),
+//                            tag: room,
+//                            selection: $selectedRoom,
+//                            label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: tcornerRadius)
                                         .fill(Color("roomCardColor"))
@@ -302,18 +302,18 @@ struct currentRooms: View {
                                         Spacer()
                                     }
                                 }
-                                .onTapGesture {
-                                    selectedRoom = room
-                                }
+//                                .onTapGesture {
+//                                    selectedRoom = room
+//                                }
                             }
-                        )
+//                        )
                     }
                 }
                 .padding(.horizontal, tdefaultPadding)
             }
         }
     }
-}
+//}
 
 
 // Custom progress bar
@@ -366,8 +366,8 @@ struct friends: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(0..<5) { index in
-                        Image("Mood\(index)")
+                    ForEach(0..<7) { index in
+                        Image("friends\(index)")
                             .resizable()
                             .clipShape(Circle())
                             .foregroundStyle(.white)

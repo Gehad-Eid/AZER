@@ -12,6 +12,12 @@ struct Challenge: View {
     let challenge : String
     
     @State var timer = false
+    @State var passed = false
+    @State var showLoginAlert = false
+    
+    @EnvironmentObject var userModel : UserModel
+    
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -26,28 +32,40 @@ struct Challenge: View {
                 
                 // The challenge
                 VStack {
-                    Image(image)
+                    Image(passed ? "passed" : image)
                         .resizable()
                         .frame( maxWidth: 200,maxHeight: 300)
                         .padding(.bottom, tdefaultPadding)
                     
-                    Text(challenge)
-                        .bold()
-                        .font(.title2)
-                        .foregroundColor(Color("challengeTextColor"))
+                    if !passed{
+                        Text(challenge)
+                            .bold()
+                            .font(.title2)
+                            .foregroundColor(Color("challengeTextColor"))
+                    }
                 }
             }
             
             Spacer()
             
             // Buttons
-            if !timer{
+            if !timer && userModel.getCurrentUserRemainingTime()! > 600{
                 HStack (spacing: 24) {
                     tcustomButton(title: "Pass", color: "primaryTextColor")
                         .overlay(RoundedRectangle(cornerRadius: tcornerRadius)
                             .stroke(.black, lineWidth: 1.5))
                         .onTapGesture {
-                            
+                            showLoginAlert.toggle()
+                        }
+                        .alert(isPresented: $showLoginAlert) {
+                            Alert(
+                                title: Text("Pass the challagnge?"),
+                                message: Text("Are you sure you want to pass? you'll lose today's points"),
+                                primaryButton: .default(Text("Pass"), action: {
+                                    dismiss()
+                                }),
+                                secondaryButton: .cancel()
+                            )
                         }
                     
                     Spacer()
@@ -60,8 +78,13 @@ struct Challenge: View {
                 }
                 .padding(tdefaultPadding)
             }
+            else if passed{
+                Text("You Passed!")
+                    .bold()
+                    .font(.title2)
+            }
             else{
-                TimerView()
+                TimerView(passed: $passed, timeRemaining: userModel.getCurrentUserRemainingTime() ?? 10 * 60)
             }
             
             Spacer()
@@ -78,31 +101,35 @@ struct Challenge: View {
 
 
 struct TimerView: View {
-    @State var timeRemaining = 24*60*60
+    @Binding var passed: Bool
+    @State var timeRemaining: Int
+    
+    @EnvironmentObject var userModel: UserModel
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
+    
     var body: some View {
-        
         Text("\(timeString(time: timeRemaining))")
             .font(.system(size: 60))
             .frame(height: 80.0)
             .frame(minWidth: 0, maxWidth: .infinity)
             .foregroundColor(.black)
-            .onReceive(timer){ _ in
-                if self.timeRemaining > 0 {
+            .onReceive(timer) { _ in
+                if self.timeRemaining > userModel.getCurrentUserRemainingTime() ?? 0 {
+                    self.timeRemaining = userModel.getCurrentUserRemainingTime() ?? 0
+                } else if self.timeRemaining > 0 {
                     self.timeRemaining -= 1
-                }else{
+                    userModel.setCurrentUserRemainingTime(time: self.timeRemaining)
+                } else {
                     self.timer.upstream.connect().cancel()
+                    passed = true
                 }
             }
     }
-    
-    //Convert the time into 24hr (24:00:00) format
+
     func timeString(time: Int) -> String {
-        let hours   = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        return String(format: "%02i:%02i", minutes, seconds)
     }
 }
