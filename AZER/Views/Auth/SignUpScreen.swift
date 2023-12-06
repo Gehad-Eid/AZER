@@ -50,6 +50,7 @@ struct SignUpScreen: View {
 //                        destination: MainTabbedView(loged: true),
                     Button{
                         userModel.addUser(username: username, password: password)
+                        dismiss()
                     }
                         label:{ tcustomButton(title: "Sign Up", color: "primaryButtonColor")
                             
