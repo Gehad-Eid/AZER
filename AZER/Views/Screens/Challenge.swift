@@ -84,7 +84,7 @@ struct Challenge: View {
                     .font(.title2)
             }
             else{
-                TimerView(passed: $passed, timeRemaining: userModel.getCurrentUserRemainingTime() ?? 10 * 60)
+                TimerView(passed: $passed, timeRemaining: userModel.getCurrentUserRemainingTime()! < 600 ? userModel.getCurrentUserRemainingTime()! : 10 * 60)
             }
             
             Spacer()

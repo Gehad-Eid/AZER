@@ -48,6 +48,7 @@ import Foundation
 //    }
 //}
 
+
 struct Room: Codable, Hashable {
     var name: String
     var description: String
@@ -55,63 +56,75 @@ struct Room: Codable, Hashable {
     var challenge: String
 }
 
-struct User: Codable {
+struct User: Codable, Identifiable {
+    var id = UUID()
     var username: String
-//    var email: String
     var password: String
     var days: Int
     var moods: [Int]
     var rooms: [Room]
     var friends: [String]
     var timeRemaining: Int
-
-    init(username: String, /*email: String,*/ password: String, days: Int = 0, moods: [Int] = [], rooms: [Room] = [], friends: [String] = [], timeRemaining : Int = 100) {
-        self.username = username
-//        self.email = email
-        self.password = password
-        self.days = days
-        self.moods = moods
-        self.rooms = rooms
-        self.friends = friends
-        self.timeRemaining = timeRemaining
-    }
 }
 
 class UserModel: ObservableObject {
+    @AppStorage("currentUserIndex") var currentUserIndex = 0
     @AppStorage("AUTH_KEY") var authenticated = false {
-           willSet { objectWillChange.send() }
-       }
-       
-       @AppStorage("USER_KEY") var currentUserIndex = 0
-       @Published var users: [User] = []
-       
+            willSet { objectWillChange.send() }
+        }
+    @AppStorage("users") var usersData: Data?
+    @Published var users: [User] = [] {
+        didSet {
+            saveUsers()
+        }
+    }
+
     init() {
-        let sampleUser = User(
-            username: "SampleUser",
-//            email: "sample@example.com",
-            password: "password",
-            days: 11,
-            moods: [1, 2, 3, 4, 5, 0, 4], // Example moods array
-            rooms: [
-                Room(name: "Room1", description: "Room 1 Description", people: [], challenge: "Challenge 1"),
-                Room(name: "Room2", description: "Room 2 Description", people: [], challenge: "Challenge 2")
-            ],
-            friends: ["Friend1", "Friend2"],
-            timeRemaining: 5*60
-        )
-        
-        // Appending the sample user to the users array
-        self.users.append(sampleUser)
-        
-        // Save updated users array to UserDefaults
-        saveUsers()
-        
-        // Load users from UserDefaults on initialization
         loadUsers()
+        if users.isEmpty {
+            let sampleUser = User(
+                username: "SampleUser",
+                password: "password",
+                days: 11,
+                moods: [1, 2, 3, 4, 5, 0, 4],
+                rooms: [
+                    Room(name: "Room1", description: "Room 1 Description", people: [], challenge: "Challenge 1"),
+                    Room(name: "Room2", description: "Room 2 Description", people: [], challenge: "Challenge 2")
+                ],
+                friends: ["Friend1", "Friend2"],
+                timeRemaining: 5 * 60
+            )
+            users.append(sampleUser)
+        }
         
-        // Debugging - Print the loaded users and their count
         print("Loaded users: \(users)")
         print("Users count: \(users.count)")
+    }
+
+    func saveUsers() {
+        do {
+            let encoder = JSONEncoder()
+            let encodedUsers = try encoder.encode(users)
+            usersData = encodedUsers
+        } catch {
+            print("Error encoding users data: \(error)")
+        }
+    }
+
+    func loadUsers() {
+        guard let data = usersData else { return }
+        do {
+            let decoder = JSONDecoder()
+            let decodedUsers = try decoder.decode([User].self, from: data)
+            users = decodedUsers
+        } catch {
+            print("Error decoding users data: \(error)")
+        }
+    }
+
+    func addUser(username: String, password: String) {
+        let newUser = User(username: username, password: password, days: 0, moods: [], rooms: [], friends: [], timeRemaining: 1000)
+        users.append(newUser)
     }
     
     func authenticate(username: String, password: String) {
@@ -131,29 +144,6 @@ class UserModel: ObservableObject {
         }
     }
     
-    func loadUsers() {
-        if let storedUsers = UserDefaults.standard.data(forKey: "USERS_KEY") {
-            let decoder = JSONDecoder()
-            if let decodedUsers = try? decoder.decode([User].self, from: storedUsers) {
-                self.users = decodedUsers
-            }
-        }
-    }
-        
-    // Function to save users to UserDefaults
-    func saveUsers() {
-        let encoder = JSONEncoder()
-        if let encodedUsers = try? encoder.encode(users) {
-            UserDefaults.standard.set(encodedUsers, forKey: "USERS_KEY")
-        }
-    }
-
-        // Function to add a new user to the users array and save it
-    func addUser(username: String, /*email: String,*/ password: String) {
-        let newUser = User(username: username, password: password) /* email: email,*/
-        users.append(newUser)
-        saveUsers() // Save the updated users array to UserDefaults
-    }
     
     // Function to get the username of the current user
     func getCurrentUsername() -> String? {
@@ -165,17 +155,6 @@ class UserModel: ObservableObject {
         let currentUsername = users[currentUserIndex].username
         return currentUsername
     }
-    
-    // Function to get the email of the current user
-//    func getCurrentUserEmail() -> String? {
-//        guard currentUserIndex >= 0, currentUserIndex < users.count else {
-//            // Return nil if the current user index is out of bounds
-//            return nil
-//        }
-//        
-//        let currentUserEmail = users[currentUserIndex].email
-//        return currentUserEmail
-//    }
     
     // Function to get the last 6 elements of the userArray of the current user
     func getLastSixElementsOfCurrentUserArray() -> [Int] {

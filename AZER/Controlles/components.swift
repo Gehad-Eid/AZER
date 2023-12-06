@@ -260,7 +260,7 @@ struct currentRooms: View {
     let title: String
     
     @EnvironmentObject var userModel: UserModel
-//    @State private var selectedRoom: Room?
+    //    @State private var selectedRoom: Room?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -269,50 +269,52 @@ struct currentRooms: View {
                 .padding(.top, tdefaultPadding)
                 .font(.title2)
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(userModel.users[userModel.currentUserIndex].rooms, id: \.self) { room in
-                        // Use NavigationLink to navigate to RoomView when tapped
-//                        NavigationLink(
-//                            destination: RoomScreen(room: $selectedRoom),
-//                            tag: room,
-//                            selection: $selectedRoom,
-//                            label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: tcornerRadius)
-                                        .fill(Color("roomCardColor"))
-                                        .frame(width: 150, height: 210)
+            if !userModel.users[userModel.currentUserIndex].rooms.isEmpty{
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(userModel.users[userModel.currentUserIndex].rooms, id: \.self) { room in
+                            // Use NavigationLink to navigate to RoomView when tapped
+                            //                        NavigationLink(
+                            //                            destination: RoomScreen(room: $selectedRoom),
+                            //                            tag: room,
+                            //                            selection: $selectedRoom,
+                            //                            label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: tcornerRadius)
+                                    .fill(Color("roomCardColor"))
+                                    .frame(width: 150, height: 210)
+                                
+                                VStack(alignment: .leading) {
+                                    Spacer()
+                                    Image("room\(Int.random(in: 0..<3))")
+                                        .resizable()
+                                        .frame(maxWidth: 120, maxHeight: 100)
                                     
-                                    VStack(alignment: .leading) {
-                                        Spacer()
-                                        Image("room\(Int.random(in: 0..<3))")
-                                            .resizable()
-                                            .frame(maxWidth: 120, maxHeight: 100)
-                                        
-                                        Spacer()
-                                        
-                                        Text(room.name)
-                                            .font(.title3)
-                                            .foregroundColor(.white)
-                                        
-                                        Text(room.description)
-                                            .font(.footnote)
-                                            .foregroundColor(.white)
-                                        
-                                        Spacer()
-                                    }
+                                    Spacer()
+                                    
+                                    Text(room.name)
+                                        .font(.title3)
+                                        .foregroundColor(.white)
+                                    
+                                    Text(room.description)
+                                        .font(.footnote)
+                                        .foregroundColor(.white)
+                                    
+                                    Spacer()
                                 }
-//                                .onTapGesture {
-//                                    selectedRoom = room
-//                                }
                             }
-//                        )
+                            //                                .onTapGesture {
+                            //                                    selectedRoom = room
+                            //                                }
+                        }
+                        //                        )
                     }
                 }
                 .padding(.horizontal, tdefaultPadding)
             }
         }
     }
+}
 //}
 
 
