@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MyMapScreen: View {
+    @EnvironmentObject var userModel : UserModel
+    
+    @State private var isLoginSheetPresented = false
+
     var body: some View {
         
             ScrollView (showsIndicators: false) {
@@ -39,12 +43,22 @@ struct MyMapScreen: View {
                                 Spacer()
                                 
                                 VStack(alignment: .leading) {
-                                    Text("Hi Bahaa!")
-                                        .font(.title)
-                                        .foregroundColor(Color("HeadlineColor"))
-                                        .padding(tdefaultPadding)
-                                    
-                                    
+                                    if userModel.authenticated {
+                                        if let username = userModel.getCurrentUsername() {
+                                            Text("Hi \(username)!")
+                                                .font(.title)
+                                                .foregroundColor(Color("HeadlineColor"))
+                                        }
+                                        else {
+                                            Text("Hi there!")
+                                                .font(.title)
+                                                .foregroundColor(Color("HeadlineColor"))
+                                        }
+                                    }else {
+                                        Text("Hi there!")
+                                            .font(.title)
+                                            .foregroundColor(Color("HeadlineColor"))
+                                    }
                                 }
                                 
                                 Spacer()
@@ -53,11 +67,33 @@ struct MyMapScreen: View {
                                 Spacer()
                                 Spacer()
                                 Spacer()
-//                                NavigationLink (destination: SettingsScreen()){
-                                    Image("Set")
+                                if userModel.authenticated {
+                                    Button{
+                                        userModel.logOut()
+                                    }
+                                label:{
+                                    
+                                    Image(systemName: "rectangle.portrait.and.arrow.right.fill")
                                         .resizable()
-                                        .frame(width: 30,height: 30)
-//                                }
+                                        .frame(width: 25,height: 25)
+                                        .foregroundColor(.black)
+                                }
+                                    
+                                }
+                                else{
+                                    Button{
+                                        isLoginSheetPresented.toggle()
+                                    }
+                                label:{
+                                    Image(systemName: "person.badge.key.fill")
+                                        .resizable()
+                                        .frame(width: 25,height: 25)
+                                        .foregroundColor(.black)
+                                }
+                                .sheet(isPresented: $isLoginSheetPresented){
+                                    LoginScreen()
+                                }
+                                }
                             }
                             .padding(tdefaultPadding)
                         }

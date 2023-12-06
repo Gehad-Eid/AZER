@@ -62,12 +62,6 @@ struct WorldScreen: View {
                                 .padding(.horizontal, tdefaultPadding - 10)
                             }
                             
-                            Button{
-                                userModel.logOut()
-                            }
-                                label:{
-                                Text("logout")
-                            }
                             // 21 days challenge
                             cardWithTitle(
                                 title: "21 days challenge", height: 70,

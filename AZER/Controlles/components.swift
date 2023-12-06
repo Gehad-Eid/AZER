@@ -183,19 +183,25 @@ struct topBar: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    if let usermane = userModel.getCurrentUsername(){
-                        Text("Hi \(usermane)!")
-                            .font(.title)
-                            .foregroundColor(Color("HeadlineColor"))
-                    }
-                    else{
+                    if userModel.authenticated {
+                        if let username = userModel.getCurrentUsername() {
+                            Text("Hi \(username)!")
+                                .font(.title)
+                                .foregroundColor(Color("HeadlineColor"))
+                        }
+                        else {
+                            Text("Hi there!")
+                                .font(.title)
+                                .foregroundColor(Color("HeadlineColor"))
+                        }
+                    }else {
                         Text("Hi there!")
                             .font(.title)
                             .foregroundColor(Color("HeadlineColor"))
                     }
-                        
-                        Text("Ready to change your mood?")
-                            .foregroundColor(.black.opacity(0.7))
+                    Text("Ready to change your mood?")
+                        .foregroundColor(.black.opacity(0.7))
+                    
                 }
             }
             .padding(tdefaultPadding)
